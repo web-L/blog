@@ -2247,7 +2247,9 @@ var isElementAnSFC = exports.isElementAnSFC = function isElementAnSFC(element) {
   if (isNativeDOMElement) {
     return false;
   }
-
+  if (element.type === undefined) {
+    return false;
+  }
   return !element.type.prototype.isReactComponent;
 };
 function omit(obj) {
