@@ -9,7 +9,7 @@
                         <Card class="card-item" >
                             <div style="text-align:center" @click="openDetail(item2.id,item2.cmt_cnt)">
                                 <div class="thumbnail-box">
-                                    <img :title="item2.title" :alt="item2.title" v-if="item2.thumbnails.length >= 1" :src="item2.thumbnails[0].url+'&height=140&width=238'" >
+                                    <img :title="item2.title" :alt="item2.title" v-if="item2.thumbnails.length >= 1" :src="item2.thumbnails[0].url" >
                                     <p v-else><Icon type="sad-outline" class="icon-outline-diy"></Icon>没有找到图片...</p>
                                 </div>
                                 <h3 class="title">{{item2.title}}</h3>
@@ -510,5 +510,61 @@ export default {
     .article-detail .ivu-modal-content,.article-detail .ivu-modal{
         height: 100%;
     }
+    .headlines-list .thumbnail-box{
+        height: auto;
+    }
+    .headlines-list .thumbnail-box img{
+        height: 136px;
+        margin: auto;
+    }
 
+
+    @media screen and (max-width:1024px){
+        .ivu-col-span-6{
+            width: 32.2%;
+            margin:0 5px;
+        }
+        .card-item {
+            width: auto;
+        }
+        .headlines-list .ivu-tabs .ivu-tabs-tabpane{
+            padding-left: 0;
+        }
+        .headlines-list .ivu-tabs-tabpane .ivu-row{
+            max-height: none;
+            min-height: auto;
+        }
+    }
+    @media screen and (max-width:920px){
+        .ivu-col-span-6{
+            width: 48.6%;
+        }
+        .article-detail .ivu-modal{
+            width: 100% !important;
+            margin: 0px;
+            padding-right: 0; 
+        }
+        .detail-modal-wrap .ivu-modal-close{
+            right: 28px;
+            top: -2px;
+        }
+         .detail-modal-wrap .ivu-modal-close .ivu-icon-ios-close-empty{
+             color: #000;
+         }
+        .article-detail .back-top{
+            bottom: 28px;
+            right: 22px;
+            background: #e0e0e0;
+        }
+    }
+    @media screen and (max-width:768px){
+        .ivu-col-span-6{
+            width: 100%;
+             margin:0;
+        }
+        .headlines-list .thumbnail-box img{
+            width: 100%;
+            height: auto;
+        }
+    }
 </style>

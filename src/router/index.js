@@ -13,6 +13,7 @@ import { mapState } from "vuex";
 Vue.use(Router)
 
 export default new Router({
+  //mode: 'history',
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition

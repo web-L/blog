@@ -2,13 +2,15 @@
   <div class="container relative article-list">
      <Spin size="large" fix v-if="spinShow"></Spin>
       <Row>
-            <Col span="17">
+            <Col span="17" class="left-wrap">
                 <ArticleList :topTitle="title" :pageRouter="'v-article-page'" :listdata="articleLists.category.data" :totalPage="articleLists.category.total" :currentPage="articleLists.category.page"></ArticleList>
             </Col>
-            <Col span="7">
-                <Category :categoryList="categoryData.data" :categoryId="categoryId"></Category>
-                <RightArticle :title="'最新推荐'" :newArticleList="articleLists.recommend.data"></RightArticle>
-            </Col>
+            <div class="right-wrap">
+                <Col span="7">
+                    <Category :categoryList="categoryData.data" :categoryId="categoryId"></Category>
+                    <RightArticle :title="'最新推荐'" :newArticleList="articleLists.recommend.data"></RightArticle>
+                </Col>
+            </div>
       </Row>
       
   </div>

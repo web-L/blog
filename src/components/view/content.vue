@@ -3,7 +3,7 @@
       <div class="con-content">
           <Spin size="large" fix v-if="spinShow"></Spin>
           <Row>
-            <Col span="17">
+            <Col span="17" class="left-wrap">
                 <Card style="width:99%">
                     <h2 class="content-title">{{articleLists.content.data.title}}&nbsp;<span class="from" v-if="articleLists.content.data.source == 2">[转]</span></h2>
                     <div class="content-author">
@@ -28,12 +28,13 @@
                     <Gitalk v-if="isGitalk" :title="articleLists.content.data.title" :id="articleLists.content.data.uid"></Gitalk>
                 </Card>
             </Col>
-            <Col span="7">
+            <Col span="7" class="right-wrap">
                 <Category :categoryList="categoryData.data" :categoryId="articleLists.content.data.category"></Category>
                 <RightArticle :newArticleList="articleLists.leftColumnData"></RightArticle>
-            </Col>
+            </Col> 
         </Row>
       </div>
+      <div class="go-back" @click="$router.go(-1)"><Icon type="chevron-left"></Icon></div>
   </div>
 </template>
 

@@ -201,7 +201,8 @@ export default new Vuex.Store({
             },
             thisChannel: '100',
             
-        }
+        },
+        slideNavState: false
     },
     mutations: {
         receiveNavData( state , {data} ){
@@ -312,6 +313,9 @@ export default new Vuex.Store({
         updateMetaTitle(state, title){
             state.metaInfoData.data.title = state.metaInfoData.data.title === undefined ? state.metaInfoData.data.site_title : state.metaInfoData.data.title;
             state.metaInfoData.data.site_title = `${title} | ${state.metaInfoData.data.title}`;
+        },
+        updateSlideNavState(state){
+            state.slideNavState = !state.slideNavState;
         }
     },
     actions: {
