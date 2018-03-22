@@ -1,7 +1,6 @@
 <template>
   <div class="container relative headlines-list">
     <Tabs :v-model="uczzData.thisChannel" @on-click="cutChannel">
-        <Spin size="large" fix v-if="spinShow"></Spin>
         <Tab-pane v-for="(item,index) in uczzData.channel" :key="index" :label="item.name" :name="item.id+''">
             <Row>
                 <transition-group name="list" class="transition-list" tag="div">
@@ -160,7 +159,7 @@ export default {
     openDetail(id,cmt_cnt){
         this.$store.dispatch('getArticleDetail', id).then( () => {
             this.detailModel = true;
-            this.$store.dispatch('getCommentsData', {total: cmt_cnt, current: 1,detailId: id});
+            this.$store.dispatch('getCommentsData', {total: cmt_cnt, current: 1,detailId: id}).then(() => {this.$Loading.finish();});
             this.$store.commit('updateMetaTitle',this.uczzData.detail.title);
         });
     },
@@ -174,6 +173,7 @@ export default {
         this.isIconLoad = true;
         this.$store.dispatch('getChannelArticlesData', { channelId: this.uczzData.thisChannel, method: 'his' }).then( () => {
             this.isIconLoad = false;
+            this.$Loading.finish();
         });
     },
     // 刷新频道文章
@@ -182,6 +182,7 @@ export default {
         this.$store.commit('emptyChannelArticleData',this.uczzData.thisChannel);
         this.$store.dispatch('getChannelArticlesData', { channelId: this.uczzData.thisChannel, method: 'new' }).then( () => {
             this.isIconLoad = false;
+            this.$Loading.finish();
         });
     },
     // 切换频道
@@ -189,9 +190,8 @@ export default {
         let channelItem = this.getThisChannel(val);
         this.$store.commit('cutChannel',val);
         if (channelItem.articles.length <= 0) {
-            this.spinShow = true;
            this.$store.dispatch('getChannelArticlesData', { channelId: channelItem.id, method: channelItem.method }).then( () => {
-               this.spinShow = false;
+               this.$Loading.finish();
            });
         };
     },
@@ -518,53 +518,4 @@ export default {
         margin: auto;
     }
 
-
-    @media screen and (max-width:1024px){
-        .ivu-col-span-6{
-            width: 32.2%;
-            margin:0 5px;
-        }
-        .card-item {
-            width: auto;
-        }
-        .headlines-list .ivu-tabs .ivu-tabs-tabpane{
-            padding-left: 0;
-        }
-        .headlines-list .ivu-tabs-tabpane .ivu-row{
-            max-height: none;
-            min-height: auto;
-        }
-    }
-    @media screen and (max-width:920px){
-        .ivu-col-span-6{
-            width: 48.6%;
-        }
-        .article-detail .ivu-modal{
-            width: 100% !important;
-            margin: 0px;
-            padding-right: 0; 
-        }
-        .detail-modal-wrap .ivu-modal-close{
-            right: 28px;
-            top: -2px;
-        }
-         .detail-modal-wrap .ivu-modal-close .ivu-icon-ios-close-empty{
-             color: #000;
-         }
-        .article-detail .back-top{
-            bottom: 28px;
-            right: 22px;
-            background: #e0e0e0;
-        }
-    }
-    @media screen and (max-width:768px){
-        .ivu-col-span-6{
-            width: 100%;
-             margin:0;
-        }
-        .headlines-list .thumbnail-box img{
-            width: 100%;
-            height: auto;
-        }
-    }
 </style>

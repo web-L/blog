@@ -1,6 +1,5 @@
 <template>
   <div class="container relative article-list">
-     <Spin size="large" fix v-if="spinShow"></Spin>
       <Row>
             <Col span="17" class="left-wrap">
                 <ArticleList :topTitle="title" :pageRouter="'v-article-page'" :listdata="articleLists.category.data" :totalPage="articleLists.category.total" :currentPage="articleLists.category.page"></ArticleList>
@@ -27,7 +26,6 @@ export default {
   data: () => {
     return {
       title: "文章",
-      spinShow: true,
       categoryId: 0
     }
   },
@@ -39,7 +37,6 @@ export default {
   },
   methods: {
       getData(){
-        this.spinShow = true;
         this.$store.dispatch('getCategoryData').then(() => {
             this.categoryId = this.formatUrl(this.$route.fullPath) === ''? this.categoryData.data[0].id:this.formatUrl(this.$route.fullPath);
             Promise.all([
@@ -47,7 +44,7 @@ export default {
                 this.$store.dispatch('getCategoryArticleData',{limit:10,offset:this.$route.params.id || 1,id: this.categoryId}),
             ]).then(() => {
                 this.title = this.articleLists.category.item.name;
-                this.spinShow = false;
+                this.$Loading.finish();
             });
         });
     },

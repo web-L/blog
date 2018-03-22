@@ -5,13 +5,19 @@ import iView from 'iview'
 
 Vue.use(Vuex);
 
+$http.interceptors.request.use((req) => {
+    iView.LoadingBar.start();
+    return req;
+});
 $http.interceptors.response.use(function(response){
     if (response.data.status&& response.data.code !== 200){
         iView.Message.error(response.data.message || '获取数据异常！');
+        iView.$Loading.error();
     }
     return response;
 } ,function(error){
     iView.Message.error('获取数据异常！');
+    iView.$Loading.error();
     return Promise.reject(error);
 } );
 

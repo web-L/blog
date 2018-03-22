@@ -1,7 +1,6 @@
 <template>
   <div class="container" id="container">
       <div class="con-content">
-          <Spin size="large" fix v-if="spinShow"></Spin>
           <Row>
             <Col span="17" class="left-wrap">
                 <Card style="width:99%">
@@ -50,7 +49,6 @@ export default {
   name: 'v-content',
   data(){
       return {
-          spinShow: true,
           isGitalk: false,
       }
   },
@@ -75,7 +73,6 @@ export default {
   },
   methods: {
       getData(contentId){
-        this.spinShow = true;
         this.isGitalk = false;
         this.$store.commit('deleteContentArticle');
         Promise.all([
@@ -84,7 +81,7 @@ export default {
             this.$store.dispatch('getNewsArticleData',{limit:10,offset: 1,dataType: 'receiveLeftColumnData' })
         ]).then(() => {
             this.$store.commit('updateMetaTitle',this.articleLists.content.data.title);
-            this.spinShow = false;
+            this.$Loading.finish();
             this.isGitalk = true;
         });
       }

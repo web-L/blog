@@ -31,6 +31,11 @@ export default {
   components:{
     Footer,
   },
+  watch: {
+    slideNavState(){
+      document.body.style.overflow = this.slideNavState ? 'hidden':'auto';
+    }
+  },
   computed: {
     ...mapState([
       'nav',
@@ -45,7 +50,7 @@ export default {
     top: 0;
     left: -264px;
     width: 264px;
-    background: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1521476956362&di=7608ae7f689fd6c6ce11bc405c43276b&imgtype=0&src=http%3A%2F%2Fd.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2F30adcbef76094b36c78d2656a1cc7cd98d109d69.jpg) no-repeat center/cover;
+    background:#636363 url(../../assets/images/slide-bg/1.png) no-repeat center/cover;
     height: 100%;
     z-index: 10;
   }
@@ -114,5 +119,6 @@ export default {
     display: block;
     padding: 8px 0;
     margin: 0;
+    background: none;
   }
 </style>
