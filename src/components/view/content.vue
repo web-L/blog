@@ -101,4 +101,32 @@ export default {
     .con-content img {
         max-width: 88%;
     }
+    
+    .con-box h1, .con-box h2, .con-box h3, .con-box h4, .con-box h5, .con-box h6 {
+        margin: 30px 0 15px;
+        border-bottom: 1px solid #eee;
+        font-family: inherit;
+        font-weight: 700;
+        line-height: 20px;
+        color: inherit;
+        text-rendering: optimizelegibility;
+    }
+    .con-box li{
+        line-height: 2em;
+        font-size: 14px;
+        list-style-type: disc;
+        list-style: disc;
+    }
+    .con-box ul{
+        padding: 0 30px 10px;
+    }
+    .con-box h1 small, .con-box h3 {
+        font-size: 24.5px;
+    }
+    .con-box h1, .con-box h2, .con-box h3 {
+        line-height: 40px;
+    }
+    .con-box h2 small, .con-box h4 {
+        font-size: 17.5px;
+    }
 </style>

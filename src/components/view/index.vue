@@ -1,7 +1,7 @@
 <template>
   <div class="index">
     <div class="container relative display-flex flex-justify-content">
-      <div class="left-wrap">
+      <div class="left-wrap" style="width:70%;">
         <ArticleList :topTitle="title" :pageRouter="'page'" :listdata="articleLists.news.data" :totalPage="articleLists.news.total" :currentPage="articleLists.news.page"></ArticleList>
       </div>
       <indexRight></indexRight>

@@ -12,8 +12,8 @@ import Filters from './filters'
 import 'iview/dist/styles/iview.css'
 import '@/assets/style/common.css'
 
-if ("aliblog.org" === window.location.hostname){
-  axios.defaults.baseURL = 'http://aliblog.org';
+if ("aliblog.com.cn" === window.location.hostname){
+  axios.defaults.baseURL = 'http://aliblog.com.cn';
   window.gitalkConfig = {
     clientID: "8782ddeacbed22af6619",
     clientSecret: "c693aa3718baebf1c1246d3a7a5a04e21eb1f9b3",

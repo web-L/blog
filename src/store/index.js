@@ -12,12 +12,12 @@ $http.interceptors.request.use((req) => {
 $http.interceptors.response.use(function(response){
     if (response.data.status&& response.data.code !== 200){
         iView.Message.error(response.data.message || '获取数据异常！');
-        iView.$Loading.error();
+        iView.LoadingBar.error();
     }
     return response;
 } ,function(error){
     iView.Message.error('获取数据异常！');
-    iView.$Loading.error();
+    iView.LoadingBar.error();
     return Promise.reject(error);
 } );
 
@@ -243,7 +243,11 @@ export default new Vuex.Store({
             state.articleLists.category.data = data.data;
             state.articleLists.category.page = parseInt(data.pageInfo.current);
             state.articleLists.category.total = data.pageInfo.total;
-            state.articleLists.category.item = data.categoryInfo && data.categoryInfo[0];
+            if (Object.prototype.toString.call(data.categoryInfo) === '[object Object]'){
+                state.articleLists.category.item = data.categoryInfo;
+            }else{
+                state.articleLists.category.item = data.categoryInfo[0];
+            }
         },
         cutCategoryArticle(state,data){
             state.articleLists.category.item = data;
