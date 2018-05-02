@@ -1,9 +1,9 @@
 <template>
-  <div class="side-wrap" :class="[slideNavState ? 'artiveSlide' : 'closeSlide']" >
+  <div class="side-wrap" :class="[slideNavState ? 'artiveSlide' : 'closeSlide']" :style="slideBg">
       <div class="head">Ali</div>
       <Alert show-icon>
           <Icon type="ios-lightbulb-outline" slot="icon"></Icon>
-          <template slot="desc">没有人不爱惜他的生命，但很少人珍惜他时间。</template>
+          <template slot="desc">{{tips}}</template>
       </Alert>
       <nav>
         <div  class="navigation">
@@ -22,6 +22,14 @@ import Footer from '@/components/common/footer.vue'
 
 export default {
   name: 'slideNav',
+  data(){
+    return {
+      tips: '',
+      slideBg: {
+        'background-image': ''
+      }
+    }
+  },
   methods:{
     curNav(name){
       this.$store.commit('updateMetaTitle',name);
@@ -34,12 +42,17 @@ export default {
   watch: {
     slideNavState(){
       document.body.style.overflow = this.slideNavState ? 'hidden':'auto';
+      if(this.slideNavState){
+        this.tips = this.slideTips[parseInt(Math.random()*this.slideTips.length) % this.slideTips.length];
+        this.slideBg['background-image'] = `url(${this.$http.defaults.baseURL}/public/www/slide-bg/${parseInt(Math.random()*8) % 8}.png)`;
+      }
     }
   },
   computed: {
     ...mapState([
       'nav',
-      'slideNavState'
+      'slideNavState',
+      'slideTips'
     ])
   }
 }
@@ -50,7 +63,7 @@ export default {
     top: 0;
     left: -264px;
     width: 264px;
-    background:#636363 url(../../assets/images/slide-bg/1.png) no-repeat center/cover;
+    background:#636363 url(../../assets/images/slide-bg/0.png) no-repeat center/cover;
     height: 100%;
     z-index: 10;
   }
